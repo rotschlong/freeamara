@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FREE amara_kok</title>
+    <!-- Tailwind CSS for utility styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & JetBrains Mono for clean typography and readable timer -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            400: '#38bdf8',
+                            500: '#06b6d4',
+                            600: '#0891b2',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Modern glowing background blobs animation */
+        @keyframes pulse-slow {
+            0%, 100% { transform: scale(1) translate(0px, 0px); opacity: 0.4; }
+            50% { transform: scale(1.1) translate(20px, -20px); opacity: 0.7; }
+        }
+        @keyframes pulse-delayed {
+            0%, 100% { transform: scale(1.1) translate(0px, 0px); opacity: 0.3; }
+            50% { transform: scale(1) translate(-20px, 20px); opacity: 0.6; }
+        }
+        .animate-blob-1 { animation: pulse-slow 8s infinite ease-in-out; }
+        .animate-blob-2 { animation: pulse-delayed 10s infinite ease-in-out; }
+
+        /* Glassmorphism styling */
+        .glass-card {
+            background: rgba(18, 24, 38, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Number card styling */
+        .time-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .time-box:hover {
+            border-color: rgba(56, 189, 248, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.1);
+        }
+
+        /* Neon Glow text effect */
+        .glow-text {
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5), 0 0 40px rgba(6, 182, 212, 0.3);
+        }
+
+        /* Smooth number change transition */
+        .number-change {
+            transition: transform 0.15s ease-in-out, opacity 0.15s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex items-center justify-center relative overflow-hidden antialiased">
+
+    <!-- Background Ambient Glow Effects -->
+    <div class="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-sky-600/30 rounded-full blur-[120px] pointer-events-none animate-blob-1"></div>
+    <div class="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[30rem] h-[30rem] bg-indigo-600/20 rounded-full blur-[140px] pointer-events-none animate-blob-2"></div>
+
+    <!-- MAIN CONTAINER -->
+    <main class="w-full max-w-4xl px-4 py-12 z-10">
+        <div class="glass-card rounded-3xl p-8 md:p-14 text-center relative overflow-hidden">
+            
+            <!-- Subtle Top Accent Line -->
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[2px] bg-gradient-to-r from-transparent via-sky-400/50 to-transparent"></div>
+
+            <!-- TITLE / HEADER -->
+            <header class="mb-10 md:mb-14">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-xs md:text-sm font-semibold tracking-wider uppercase mb-4">
+                    <span class="w-2 h-2 rounded-full bg-sky-400 animate-ping"></span>
+                    Countdown Live
+                </div>
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight text-white glow-text uppercase">
+                    FREE amara_kok
+                </h1>
+                <p id="target-date-display" class="text-slate-400 text-sm md:text-base mt-3 font-medium">
+                    Ziel: 26. September
+                </p>
+            </header>
+
+            <!-- COUNTDOWN GRID -->
+            <div id="countdown-container" class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 my-8">
+                <!-- DAYS -->
+                <div class="time-box rounded-2xl p-5 md:p-6 flex flex-col justify-center items-center">
+                    <span id="days" class="font-mono text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight">00</span>
+                    <span class="text-slate-400 text-xs md:text-sm uppercase tracking-widest mt-2 font-semibold">Tage</span>
+                </div>
+
+                <!-- HOURS -->
+                <div class="time-box rounded-2xl p-5 md:p-6 flex flex-col justify-center items-center">
+                    <span id="hours" class="font-mono text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight">00</span>
+                    <span class="text-slate-400 text-xs md:text-sm uppercase tracking-widest mt-2 font-semibold">Stunden</span>
+                </div>
+
+                <!-- MINUTES -->
+                <div class="time-box rounded-2xl p-5 md:p-6 flex flex-col justify-center items-center">
+                    <span id="minutes" class="font-mono text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight">00</span>
+                    <span class="text-slate-400 text-xs md:text-sm uppercase tracking-widest mt-2 font-semibold">Minuten</span>
+                </div>
+
+                <!-- SECONDS -->
+                <div class="time-box rounded-2xl p-5 md:p-6 flex flex-col justify-center items-center border-sky-500/20">
+                    <span id="seconds" class="font-mono text-4xl md:text-6xl lg:text-7xl font-bold text-sky-400 tracking-tight">00</span>
+                    <span class="text-slate-400 text-xs md:text-sm uppercase tracking-widest mt-2 font-semibold">Sekunden</span>
+                </div>
+            </div>
+
+            <!-- EXPIRED / COMPLETE MESSAGE (Hidden by default) -->
+            <div id="completion-message" class="hidden py-8">
+                <div class="inline-block p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-2xl md:text-4xl font-bold tracking-tight animate-bounce">
+                    🎉 Es ist soweit! FREE amara_kok! 🎉
+                </div>
+            </div>
+
+            <!-- FOOTER INFO -->
+            <footer class="mt-8 text-xs text-slate-500">
+                Echtzeit-Synchronisierung aktiv
+            </footer>
+        </div>
+    </main>
+
+    <script>
+        /**
+         * Calculates the target date: 26th September of current year.
+         * If the 26th of September of the current year has already passed,
+         * it automatically targets the next year.
+         */
+        function getTargetDate() {
+            const now = new Date();
+            const currentYear = now.getFullYear();
+            let target = new Date(currentYear, 8, 26, 0, 0, 0); // Month is 0-indexed: 8 = September
+
+            // If target date has already passed for this year, set for next year
+            if (now.getTime() > target.getTime()) {
+                target = new Date(currentYear + 1, 8, 26, 0, 0, 0);
+            }
+            return target;
+        }
+
+        const targetDate = getTargetDate();
+
+        // Display targeted year next to the date label
+        document.getElementById('target-date-display').textContent = `Ziel: 26. September ${targetDate.getFullYear()}`;
+
+        // DOM Element References
+        const daysEl = document.getElementById('days');
+        const hoursEl = document.getElementById('hours');
+        const minutesEl = document.getElementById('minutes');
+        const secondsEl = document.getElementById('seconds');
+        const countdownContainer = document.getElementById('countdown-container');
+        const completionMessage = document.getElementById('completion-message');
+
+        /**
+         * Helper function to pad numbers with leading zero
+         */
+        function padZero(num) {
+            return num < 10 ? `0${num}` : num;
+        }
+
+        /**
+         * Main update function to calculate and render remaining time
+         */
+        function updateCountdown() {
+            const currentTime = new Date().getTime();
+            const timeDifference = targetDate.getTime() - currentTime;
+
+            // If countdown is finished
+            if (timeDifference <= 0) {
+                countdownContainer.classList.add('hidden');
+                completionMessage.classList.remove('hidden');
+                return;
+            }
+
+            // Calculations for Days, Hours, Minutes, Seconds
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            // Update DOM content efficiently
+            daysEl.textContent = padZero(days);
+            hoursEl.textContent = padZero(hours);
+            minutesEl.textContent = padZero(minutes);
+            secondsEl.textContent = padZero(seconds);
+        }
+
+        // Initial call to avoid layout shift/delay
+        updateCountdown();
+
+        // Run countdown calculation every second (1000ms)
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
