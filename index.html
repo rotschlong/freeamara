@@ -98,7 +98,7 @@
                     FREE amara_kok
                 </h1>
                 <p id="target-date-display" class="text-slate-400 text-sm md:text-base mt-3 font-medium">
-                    Ziel: 26. September
+                    Ziel: 27. September
                 </p>
             </header>
 
@@ -141,18 +141,18 @@
 
     <script>
         /**
-         * Calculates the target date: 26th September of current year.
-         * If the 26th of September of the current year has already passed,
+         * Calculates the target date: 27th September of current year.
+         * If the 27th of September of the current year has already passed,
          * it automatically targets the next year.
          */
         function getTargetDate() {
             const now = new Date();
             const currentYear = now.getFullYear();
-            let target = new Date(currentYear, 8, 26, 0, 0, 0); // Month is 0-indexed: 8 = September
+            let target = new Date(currentYear, 8, 27, 0, 0, 0); // Month is 0-indexed: 8 = September
 
             // If target date has already passed for this year, set for next year
             if (now.getTime() > target.getTime()) {
-                target = new Date(currentYear + 1, 8, 26, 0, 0, 0);
+                target = new Date(currentYear + 1, 8, 27, 0, 0, 0);
             }
             return target;
         }
@@ -160,7 +160,7 @@
         const targetDate = getTargetDate();
 
         // Display targeted year next to the date label
-        document.getElementById('target-date-display').textContent = `Ziel: 26. September ${targetDate.getFullYear()}`;
+        document.getElementById('target-date-display').textContent = `Ziel: 27. September ${targetDate.getFullYear()}`;
 
         // DOM Element References
         const daysEl = document.getElementById('days');
